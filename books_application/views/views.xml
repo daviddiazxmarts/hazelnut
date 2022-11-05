@@ -122,17 +122,16 @@
             </group>
           </group>
         </sheet>
-        <div attrs="{'invisible': [('tipo', '!=', 'pdf')]}">
-          <!-- Attachment preview -->
-          <div class="o_attachment_preview" />
-          <!-- Chatter -->
-          <div class="oe_chatter">
-              <field name="message_follower_ids"/>
-              <field name="activity_ids"/>
-              <field name="message_ids"/>
-          </div>
+      
+        <!-- Attachment preview -->
+        <div class="o_attachment_preview" />
+        <!-- Chatter -->
+        <div class="oe_chatter">
+            <field name="message_follower_ids"/>
+            <field name="activity_ids"/>
+            <field name="message_ids"/>
         </div>
-      </form>
+    </form>
     </field>
   </record>
   <record id="type_of_document_tree" model="ir.ui.view">
