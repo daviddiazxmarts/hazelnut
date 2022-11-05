@@ -1,0 +1,219 @@
+<odoo>
+  <data>
+   <record id="books_application_form" model="ir.ui.view">
+     <field name="name">books.application.form</field>
+     <field name="model">books.application</field>
+     <field name="arch" type="xml">
+       <form string="Categorias">
+         <header>
+         </header>
+         <sheet>
+           <group>
+             <group>
+               <field name="name"/>
+               <field name="img_documents"/>
+               <field name="tipo" invisible="0"/>
+             </group>
+             <group>
+            </group>
+           </group>
+         </sheet>
+       </form>
+     </field>
+   </record>
+
+   <record id="books_application_tree" model="ir.ui.view">
+    <field name="name">books.application.tree</field>
+    <field name="model">books.application</field>
+    <field name="arch" type="xml">
+      <tree string="Categorias">
+        <field name="name"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="books_application_view_kanban" model="ir.ui.view">
+    <field name="name">books.application.view.kanban</field>
+    <field name="model">books.application</field>
+    <field name="arch" type="xml">
+        <kanban class="o_kanban_dashboard o_pos_kanban">
+            <templates>
+              <field name="tipo" invisible="1"/>
+                <t t-name="kanban-box">
+                    <div class="oe_kanban_card">
+                        <div class="o_kanban_card_header">
+                            <div class="o_kanban_card_header_title mb16">
+                                <div class="o_primary">
+                                  <button
+                                  class="btn btn-primary"
+                                  name="open_view_world"
+                                  type="object"
+                                  attrs="{'invisible': [('tipo', '!=', 'doc')]}">Abrir</button>
+
+                                  <button
+                                  class="btn btn-primary"
+                                  name="open_view_excel"
+                                  type="object"
+                                  attrs="{'invisible': [('tipo', '!=', 'excel')]}">Abrir</button>
+
+                                  <button
+                                  class="btn btn-primary"
+                                  name="open_view_power"
+                                  type="object"
+                                  attrs="{'invisible': [('tipo', '!=', 'power')]}">Abrir</button>
+
+                                  <button
+                                  class="btn btn-primary"
+                                  name="open_view_pdf"
+                                  type="object"
+                                  attrs="{'invisible': [('tipo', '!=', 'pdf')]}">Abrir</button>
+
+
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="container o_kanban_card_content">
+                            <div class="row align-items-center"> 
+                              <field name="img_documents" widget="image"/>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+
+<record id="type_of_document_view_kanban" model="ir.ui.view">
+  <field name="name">type.of.document.view.kanban</field>
+  <field name="model">type.of.document</field>
+  <field name="arch" type="xml">
+      <kanban class="o_kanban_dashboard o_pos_kanban">
+          <templates>
+              <t t-name="kanban-box">
+                  <div class="container o_kanban_card_content oe_kanban_global_click" >
+                      <div class="">
+                        <span><field name="name"/></span>
+                          <div class="row"> 
+                            <!-- <button string="Abrir" name="action_open_register" type="object" class="oe_highlight"/> -->
+                            <field name="img_document" widget="image"/>
+                          </div>
+                      </div>
+                  </div>
+              </t>
+          </templates>
+      </kanban>
+  </field>
+  </record>
+  <record id="type_of_document_form" model="ir.ui.view">
+    <field name="name">type.of.document.form</field>
+    <field name="model">type.of.document</field>
+    <field name="arch" type="xml">
+      <form string="Descarga de documentos">
+        <header>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="tipo"/>
+              <field name="doc_documents"/>
+              <field name="img_document"/>
+            </group>
+          </group>
+        </sheet>
+        <div attrs="{'invisible': [('tipo', '!=', 'pdf')]}">
+          <!-- Attachment preview -->
+          <div class="o_attachment_preview" />
+          <!-- Chatter -->
+          <div class="oe_chatter">
+              <field name="message_follower_ids"/>
+              <field name="activity_ids"/>
+              <field name="message_ids"/>
+          </div>
+        </div>
+      </form>
+    </field>
+  </record>
+  <record id="type_of_document_tree" model="ir.ui.view">
+    <field name="name">type.of.document.tree</field>
+    <field name="model">type.of.document</field>
+    <field name="arch" type="xml">
+      <tree string="Descarga de documentos">
+        <field name="name"/>
+        <field name="tipo"/>
+        <field name="doc_documents"/>
+        <field name="img_document"/>
+      </tree>
+    </field>
+  </record>
+
+    <record id="book_application_action_kanban" model="ir.actions.act_window">
+      <field name="name">Categorias</field>
+      <field name="res_model">books.application</field>
+      <field name="view_mode">kanban</field>
+      <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+              Crear Tipo/Categoria
+          </p>
+      </field>
+  </record>
+
+  <record id="book_application_action_tree_form" model="ir.actions.act_window">
+    <field name="name">Categorias</field>
+    <field name="res_model">books.application</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Crear Tipo/Categoria
+        </p>
+    </field>
+  </record>
+
+  <record id="downloads_documents_action_tree_form" model="ir.actions.act_window">
+    <field name="name">Documentos</field>
+    <field name="res_model">type.of.document</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+            Documentos
+        </p>
+    </field>
+  </record>
+
+   <menuitem 
+   name="Hazelnut" 
+   id="menu_root_books_type"
+   web_icon="books_application,static/description/icon.png"
+   action="book_application_action_kanban" 
+   sequence="1"/>
+   <menuitem 
+   id="submenu_root_books_type"
+   name="Configuracion"
+   parent="menu_root_books_type"
+   sequence="2"
+   />
+   <menuitem 
+   id="submenu_root_books_type_add"
+   name="Configuracion"
+   parent="submenu_root_books_type"
+   sequence="3"
+   />
+   <menuitem 
+   id="submenu_root_books_type_add_documents_types"
+   name="Agregar Tipos"
+   parent="submenu_root_books_type_add"
+   action="book_application_action_tree_form"
+   sequence="4"
+   />
+   <menuitem 
+   id="submenu_root_books_type_add_documents"
+   name="Cargar Documentos"
+   parent="submenu_root_books_type_add"
+   action="downloads_documents_action_tree_form"
+   sequence="5"
+   />
+
+
+  </data>
+</odoo>
